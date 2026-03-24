@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>KEOS — Concours d'Admission</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+
+    <!-- ─── Animated Background ─────────────────── -->
+    <div class="bg-wrap" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="grid-mesh"></div>
+    </div>
+
+    <div class="shell">
+
+      <!-- Brand Header -->
+      <header class="brand-bar">
+        <div class="brand-logo-box">
+          <img src="./3d39fdb763047c9c471ed3f7eb5777cb3d7b057c.png" alt="KEOS" class="brand-img"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+          <div class="brand-fallback-k" style="display:none">K</div>
+        </div>
+        <div class="brand-txt">
+          <span class="brand-name">KEOS</span>
+          <span class="brand-sub">École de Commerce</span>
+        </div>
+      </header>
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- SCREEN 1 · WELCOME                       -->
+      <!-- ════════════════════════════════════════ -->
+      <section id="screen-welcome" class="screen active">
+        <div class="hero-wrap">
+
+          <div class="hero-emblem">
+            <div class="e-ring e-r1"></div>
+            <div class="e-ring e-r2"></div>
+            <div class="e-ring e-r3"></div>
+            <div class="e-logo">
+              <img src="./3d39fdb763047c9c471ed3f7eb5777cb3d7b057c.png" alt="K"
+                   onerror="this.parentElement.textContent='K'" />
+            </div>
+          </div>
+
+          <h1 class="hero-h1">
+            Concours<br />
+            <span class="grad-txt">d'Admission</span>
+          </h1>
+          <p class="hero-p">Sélectionnez votre niveau et prouvez votre excellence en&nbsp;47 questions chronométrées.</p>
+
+          <div class="chips-row">
+            <div class="chip"><i class="fa-solid fa-stopwatch"></i>20 s / question</div>
+            <div class="chip"><i class="fa-solid fa-trophy"></i>Médailles</div>
+            <div class="chip"><i class="fa-solid fa-crown"></i>Record local</div>
+          </div>
+
+          <button id="btn-start" class="btn-primary">
+            <span>Commencer</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- SCREEN 2 · FORM                          -->
+      <!-- ════════════════════════════════════════ -->
+      <section id="screen-form" class="screen">
+        <div class="g-card">
+          <div class="c-head">
+            <div class="c-icon"><i class="fa-solid fa-user-tie"></i></div>
+            <div>
+              <h2 class="c-title">Informations candidat</h2>
+              <p class="c-sub">Renseignez votre profil pour commencer</p>
+            </div>
+          </div>
+
+          <form id="candidate-form" novalidate>
+            <div class="row-2">
+              <label class="f-label">
+                Nom
+                <div class="i-wrap"><i class="fa-solid fa-user fi"></i><input type="text" id="lastName" placeholder="Dupont" required /></div>
+              </label>
+              <label class="f-label">
+                Prénom
+                <div class="i-wrap"><i class="fa-solid fa-user fi"></i><input type="text" id="firstName" placeholder="Marie" required /></div>
+              </label>
+            </div>
+
+            <label class="f-label">
+              Email
+              <div class="i-wrap"><i class="fa-solid fa-envelope fi"></i><input type="email" id="email" placeholder="marie@exemple.com" required /></div>
+            </label>
+
+            <div class="row-2">
+              <label class="f-label">
+                Téléphone
+                <div class="i-wrap"><i class="fa-solid fa-phone fi"></i><input type="tel" id="phone" placeholder="+33 6 …" required /></div>
+              </label>
+              <label class="f-label">
+                Âge
+                <div class="i-wrap"><i class="fa-solid fa-calendar-days fi"></i><input type="number" id="age" placeholder="22" min="15" max="70" required /></div>
+              </label>
+            </div>
+
+            <!-- Level visual cards -->
+            <div class="f-label">
+              Niveau visé
+              <div class="level-grid">
+                <label class="lv-card">
+                  <input type="radio" name="level-radio" value="bac2" />
+                  <div class="lv-inner">
+                    <i class="fa-solid fa-book-open"></i>
+                    <strong>Bac+2</strong>
+                    <span>BTS / DUT</span>
+                  </div>
+                </label>
+                <label class="lv-card">
+                  <input type="radio" name="level-radio" value="bac3" />
+                  <div class="lv-inner">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <strong>Bac+3</strong>
+                    <span>Bachelor</span>
+                  </div>
+                </label>
+                <label class="lv-card">
+                  <input type="radio" name="level-radio" value="master" />
+                  <div class="lv-inner">
+                    <i class="fa-solid fa-star"></i>
+                    <strong>Master</strong>
+                    <span>M1 / M2</span>
+                  </div>
+                </label>
+              </div>
+              <!-- Hidden select kept for JS validation -->
+              <select id="level" class="visually-hidden" required aria-hidden="true" tabindex="-1">
+                <option value="">Choisir</option>
+                <option value="bac2">Bac+2</option>
+                <option value="bac3">Bac+3</option>
+                <option value="master">Master</option>
+              </select>
+            </div>
+
+            <label class="f-label">
+              Objectif du concours
+              <div class="i-wrap ta-wrap">
+                <i class="fa-solid fa-pen-to-square fi fi-top"></i>
+                <textarea id="objective" rows="3" placeholder="Ex : intégrer la formation Responsable des Affaires et développer mes compétences en management…" required></textarea>
+              </div>
+            </label>
+
+            <p id="form-error" class="err-msg"></p>
+
+            <button type="submit" class="btn-primary">
+              <span>Lancer le quiz</span>
+              <i class="fa-solid fa-play"></i>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- SCREEN 3 · QUIZ                          -->
+      <!-- ════════════════════════════════════════ -->
+      <section id="screen-quiz" class="screen">
+        <div class="quiz-bar">
+          <div id="quiz-level-pill" class="q-badge">Niveau</div>
+          <div class="timer-wr">
+            <svg class="t-svg" viewBox="0 0 72 72">
+              <circle class="t-track" cx="36" cy="36" r="30" />
+              <circle id="timer-ring" class="t-ring" cx="36" cy="36" r="30" />
+            </svg>
+            <span id="timer" class="t-num">20</span>
+          </div>
+        </div>
+
+        <div class="prog-section">
+          <div class="prog-meta">
+            <span id="progress-label">Question 1/47</span>
+            <span id="progress-percent">0 %</span>
+          </div>
+          <div class="prog-track"><div id="progress-fill" class="prog-fill"></div></div>
+        </div>
+
+        <div class="g-card q-card">
+          <span id="question-section" class="sec-tag"></span>
+          <h3 id="question-text" class="q-h3"></h3>
+          <div id="answer-zone" class="ans-zone"></div>
+        </div>
+
+        <button id="btn-next" class="btn-primary">
+          <span>Suivant</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </section>
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- SCREEN 4 · RESULTS                       -->
+      <!-- ════════════════════════════════════════ -->
+      <section id="screen-result" class="screen">
+
+        <div class="res-top">
+          <div class="medal-scene">
+            <div id="medal-icon" class="medal-display">
+              <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div class="medal-glow"></div>
+          </div>
+          <h2 id="result-title" class="res-name">Félicitations !</h2>
+          <p id="result-subtitle" class="res-lv"></p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="s-tile">
+            <i class="fa-solid fa-scroll"></i>
+            <strong id="final-note">0/20</strong>
+            <span>Note</span>
+          </div>
+          <div class="s-tile">
+            <i class="fa-solid fa-bullseye"></i>
+            <strong id="final-score">0 %</strong>
+            <span>Score</span>
+          </div>
+          <div class="s-tile">
+            <i class="fa-solid fa-check-double"></i>
+            <strong id="correct-count">0</strong>
+            <span>Justes</span>
+          </div>
+          <div class="s-tile">
+            <i class="fa-solid fa-crown"></i>
+            <strong id="record-score">0 %</strong>
+            <span>Record</span>
+          </div>
+        </div>
+
+        <div id="final-message" class="final-banner"></div>
+
+        <div class="g-card review-card">
+          <div class="review-hd">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+            <h3>Correction des erreurs</h3>
+          </div>
+          <p class="review-p">Vos réponses incorrectes et les bonnes réponses attendues.</p>
+          <div id="error-list" class="err-list"></div>
+        </div>
+
+        <button id="btn-restart" class="btn-primary btn-outline">
+          <i class="fa-solid fa-rotate-right"></i>
+          <span>Recommencer</span>
+        </button>
+      </section>
+
+    </div><!-- /shell -->
+
+    <script src="./app.js"></script>
+  </body>
+</html>
