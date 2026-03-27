@@ -1,5 +1,10 @@
 const QUESTION_TIME = 20;
-const LEAD_API_URL = "http://localhost:8787/api/quiz-lead";
+// Local dev uses the standalone proxy on :8787.
+// In Vercel, the proxy must be implemented as a serverless function at `/api/quiz-lead`.
+const LEAD_API_URL =
+  (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+    ? "http://localhost:8787/api/quiz-lead"
+    : "/api/quiz-lead";
 
 const q = (id, section, text, options, correct) => ({
   id,
