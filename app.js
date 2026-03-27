@@ -24,7 +24,7 @@ const openQ = (id, section, text) => ({
 
 const QUIZ_DATA = {
   bac2: {
-    label: "Bac+2",
+    label: "Bac+2 NTC / BTS",
     questions: [
       q("b2-1", "Culture Générale", "Quelle institution est responsable de la politique monétaire dans la zone euro et décide notamment des taux d’intérêt ?", ["La Commission européenne", "La Banque Centrale Européenne", "Le FMI", "La Banque mondiale"], 1),
       q("b2-2", "Culture Générale", "Le régime politique français est généralement défini comme :", ["Un régime présidentiel pur", "Un régime parlementaire", "Un régime semi-présidentiel", "Une monarchie constitutionnelle"], 2),
@@ -79,7 +79,7 @@ const QUIZ_DATA = {
     ],
   },
   bac3: {
-    label: "Bac+3",
+    label: "Bachelor RDA",
     questions: [
       q("b3-1", "Culture Générale", "Le Produit Intérieur Brut (PIB) permet principalement de mesurer :", ["La richesse totale d’un pays", "La production de richesse sur une période donnée", "Le niveau de vie moyen", "Le pouvoir d’achat"], 1),
       q("b3-2", "Culture Générale", "Une politique monétaire restrictive mise en place par une banque centrale vise généralement à :", ["Stimuler la croissance", "Réduire l’inflation", "Augmenter les salaires", "Réduire les impôts"], 1),
@@ -134,7 +134,7 @@ const QUIZ_DATA = {
     ],
   },
   master: {
-    label: "Master",
+    label: "MASTÈRE MCM",
     questions: [
       q("m-1", "Culture Générale", "Une politique budgétaire expansionniste consiste généralement à :", ["Réduire les dépenses publiques", "Augmenter les dépenses ou réduire les impôts pour stimuler l’économie", "Stabiliser les finances publiques", "Augmenter les taxes"], 1),
       q("m-2", "Culture Générale", "Le paradoxe de l’épargne (Keynes) explique que :", ["Plus on épargne, plus l’économie croît", "Une épargne excessive peut freiner la croissance économique", "L’épargne est inutile", "L’épargne augmente l’inflation"], 1),
