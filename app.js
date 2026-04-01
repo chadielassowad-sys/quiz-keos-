@@ -326,6 +326,9 @@ function renderQuestion() {
   const answerZone = $("answer-zone");
   answerZone.innerHTML = "";
 
+  const nextBtn = $("btn-next");
+  if (nextBtn) nextBtn.disabled = true;
+
   if (question.type === "mcq") {
     question.options.forEach((optionText, optionIndex) => {
       const label = document.createElement("label");
@@ -338,6 +341,9 @@ function renderQuestion() {
       label.addEventListener("click", () => {
         document.querySelectorAll(".option").forEach((el) => el.classList.remove("active"));
         label.classList.add("active");
+        if (nextBtn) nextBtn.disabled = false;
+        const msg = $("answer-error");
+        if (msg) msg.textContent = "";
       });
       answerZone.appendChild(label);
     });
@@ -346,8 +352,19 @@ function renderQuestion() {
     textarea.id = "open-answer";
     textarea.className = "open-answer";
     textarea.placeholder = "Saisissez votre réponse...";
+    textarea.addEventListener("input", () => {
+      const hasText = textarea.value.trim().length > 0;
+      if (nextBtn) nextBtn.disabled = !hasText;
+      const msg = $("answer-error");
+      if (msg) msg.textContent = "";
+    });
     answerZone.appendChild(textarea);
   }
+
+  const err = document.createElement("p");
+  err.id = "answer-error";
+  err.className = "err-msg";
+  answerZone.appendChild(err);
 
   resetTimer();
 }
@@ -378,6 +395,22 @@ function saveAnswer(timedOut = false) {
 }
 
 function goNextQuestion() {
+  const question = state.questions[state.index];
+  const msg = $("answer-error");
+  if (question.type === "mcq") {
+    const checked = document.querySelector('input[name="q-answer"]:checked');
+    if (!checked) {
+      if (msg) msg.textContent = "Répondez à la question pour continuer.";
+      return;
+    }
+  } else {
+    const text = $("open-answer")?.value?.trim() || "";
+    if (!text) {
+      if (msg) msg.textContent = "Répondez à la question pour continuer.";
+      return;
+    }
+  }
+
   saveAnswer(false);
   goToNextStep();
 }
@@ -526,39 +559,21 @@ function renderResults() {
   }
 
   $("record-score").textContent = `${finalRecord.percent}%`;
-  $("final-message").innerHTML = `
-    <i class="${medal.icon}"></i> ${medal.label} - Niveau ${perf}<br>
-    Record ${QUIZ_DATA[state.levelKey].label}: <strong>${finalRecord.percent}%</strong> par ${finalRecord.name}<br>
-    <small>Dernière mise à jour: ${formatDate(finalRecord.when)}</small>
-  `;
+  // Résultats: afficher uniquement le score (pas de corrections).
+  const finalMessage = $("final-message");
+  if (finalMessage) finalMessage.style.display = "none";
+
+  const reviewCard = document.querySelector(".review-card");
+  if (reviewCard) reviewCard.style.display = "none";
+
+  const correctTile = $("correct-count")?.closest(".s-tile");
+  if (correctTile) correctTile.style.display = "none";
+  const recordTile = $("record-score")?.closest(".s-tile");
+  if (recordTile) recordTile.style.display = "none";
 
   if (percent >= 85) launchConfetti();
 
-  const errorList = $("error-list");
-  errorList.innerHTML = "";
-  if (!errors.length) {
-    const div = document.createElement("div");
-    div.className = "no-error";
-    div.innerHTML = '<i class="fa-solid fa-circle-check"></i> Sans erreur sur les questions QCM. Excellent résultat.';
-    errorList.appendChild(div);
-  } else {
-    errors.forEach(({ question, answer }, idx) => {
-      const item = document.createElement("article");
-      item.className = "error-item";
-      const selectedText =
-        answer && answer.selected !== null
-          ? `${String.fromCharCode(65 + answer.selected)}) ${question.options[answer.selected]}`
-          : "Aucune réponse";
-      const correctText = `${String.fromCharCode(65 + question.correct)}) ${question.options[question.correct]}`;
-      item.innerHTML = `
-        <h4>Erreur ${idx + 1} - ${question.section}</h4>
-        <p>${question.text}</p>
-        <p><span class="tag-wrong">Votre réponse:</span> ${selectedText}</p>
-        <p><span class="tag-right">Bonne réponse:</span> ${correctText}</p>
-      `;
-      errorList.appendChild(item);
-    });
-  }
+  // Les corrections sont masquées, mais on conserve le détail des erreurs pour HubSpot.
 
   const leadPayload = buildQuizLeadPayload({
     percent,
