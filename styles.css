@@ -266,6 +266,17 @@ body {
 .btn-primary:hover { box-shadow: 0 12px 44px rgba(26,77,219,.55), 0 2px 10px rgba(0,0,0,.3); }
 .btn-primary:active { transform: scale(.98); }
 
+.btn-primary:disabled {
+  background: rgba(255,255,255,.08);
+  box-shadow: none;
+  color: rgba(255,255,255,.55);
+  cursor: not-allowed;
+  transform: none;
+  filter: saturate(.6);
+}
+.btn-primary:disabled::after { display: none; }
+.btn-primary:disabled:hover { box-shadow: none; }
+
 .btn-outline {
   background: transparent !important;
   box-shadow: none !important;
